@@ -1,0 +1,78 @@
+<!DOCTYPE html> 
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="format-detection" content="telephone=no" />
+        <meta name="msapplication-tap-highlight" content="no" /> 
+         <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width"/>
+		
+	<!-- Theme Roller Files -->
+	 <link rel="stylesheet" type="text/css" href="css/jquery-mobile-theme/themes/jquery.mobile.icons.min.css" />
+	 <link rel="stylesheet" type="text/css" href="css/jquery-mobile-theme/themes/pigeontheme.min.css" />
+	
+	<!-- JQuery Mobile File -->
+	<link rel="stylesheet" href="js/jquery.mobile-1.4.5/jquery.mobile.structure-1.4.5.min.css" />    
+	<script src="js/jquery-2.1.4.min.js"></script> 
+	<script src="js/jquery.mobile-1.4.5/jquery.mobile-1.4.5.min.js"></script>  
+	
+	<!-- Bootstrap Files -->
+	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
+	<script src="js/bootstrap.min.js"></script> 
+	 
+	 <link rel="stylesheet" type="text/css" href="css/custom.css" />
+	 <script src="js/web-service.js"></script> 
+	 
+	  <link rel="stylesheet" type="text/css" href="css/chat-style.css" /> 
+	  <link rel='stylesheet prefetch' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css'>
+    <title>Pigeon</title>
+	<script>
+		status = isUser(); 
+	</script>
+	<style>
+		.user
+		{
+		    width: 50%; // These are your circle dimensions
+		    height: 50%;
+		    border-radius: 50%;
+		    background-repeat: no-repeat; 
+		    background-position: center center; // Center image in the circle
+		    background-size: cover; // Make sure it covers the circle, as there is no bg repeat
+		}
+		ul{list-style:none}
+	</style>
+    </head>
+    <body> 
+	<div id="pagedimmer"></div>
+		<div class="container"> 
+				<div data-role="header">
+					<div class="row"> 
+						<div class="col-sm-12 text-center">   
+								<!--<a href="#"> 
+									<img src="img/sample.jpg" class="user"/>
+								</a>   -->
+							<div class="chat-header clearfix">
+						        <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/195612/chat_avatar_01_green.jpg" alt="avatar">
+						        
+						        <div class="chat-about">
+						          <div class="chat-with">Chat with Vincent Porter</div>
+						          <div class="chat-num-messages">already 1 902 messages</div>
+						        </div>
+						        <i class="fa fa-star"></i>
+						      </div>
+						</div> 
+					</div>
+				</div> 
+			 
+			<div class="row" style="padding-left:25px;padding-right:25px;padding-top:25px;padding-bottom:25px;">
+				 <div class="col-sm-12" style="background-color:#fff"> 
+					 <script> 
+					 	loadHistory(getParameterByName('id'));
+					 </script> 
+						   <div id="chat"></div>
+				    </div>
+				</div> 
+			</div>
+        <script type="text/javascript" src="cordova.js"></script> 
+		
+    </body>
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html> 
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="format-detection" content="telephone=no" />
+        <meta name="msapplication-tap-highlight" content="no" /> 
+         <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width"/>
+		
+	<!-- Theme Roller Files -->
+	 <link rel="stylesheet" type="text/css" href="css/jquery-mobile-theme/themes/jquery.mobile.icons.min.css" />
+	 <link rel="stylesheet" type="text/css" href="css/jquery-mobile-theme/themes/pigeontheme.min.css" />
+	
+	<!-- JQuery Mobile File -->
+	<link rel="stylesheet" href="js/jquery.mobile-1.4.5/jquery.mobile.structure-1.4.5.min.css" />    
+	<script src="js/jquery-2.1.4.min.js"></script> 
+	<script src="js/jquery.mobile-1.4.5/jquery.mobile-1.4.5.min.js"></script> 
+	
+	<!-- Bootstrap Files -->
+	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
+	<script src="js/bootstrap.min.js"></script> 
+	 
+	 <link rel="stylesheet" type="text/css" href="css/custom.css" />
+	  <script src="js/web-service.js"></script> 
+    <title>Group</title> 
+	<script>
+		$(document).ready(function(){
+			$("#gname").focus();	
+		});
+		 
+	</script>
+    </head>
+    <body> 
+	<div id="pagedimmer"></div>
+		<div class="container">
+			<div class="jumbotron">
+				<div data-role="header">
+					<div class="row"> 
+						<div class="col-sm-12">  
+							<img src="img/back.png"   class="backbutton" onclick="goBack()"/> 
+							<div class="text-center">
+								<img src="img/groupIcon.png"  class="pic-circle-corner"/>  
+							</div>
+						</div> 
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-sm-12 text-danger">
+					<div id="warning" class="error text-center">
+						
+					</div>
+				</div>	
+			</div>
+			<div class="row" style="padding:10px;">
+				<div class="col-sm-12">
+					<form name="creategroup" id="creategroup" method="post"> 
+							  
+							<table class='col-sm-12' style="padding-top: 20px">
+								<tr>
+									<td style='width:95%'>
+										<input type="text" id="gname" name="gname" placeholder="Group Name" />
+									</td>
+									<td style='width:5%;text-align:right'>
+										<img src='img/tick.png' style='cursor:pointer;text-align: right;' width='30px' height='30px' onclick='validateGroup()'/></td>
+								</tr>
+							</table>
+					</form> 
+				</div>
+			</div> 
+		</div>
+        <script type="text/javascript" src="cordova.js"></script>  
+    </body>
+</html>

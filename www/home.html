@@ -1,0 +1,78 @@
+<!DOCTYPE html> 
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="format-detection" content="telephone=no" />
+        <meta name="msapplication-tap-highlight" content="no" /> 
+         <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width"/>
+		
+	<!-- Theme Roller Files -->
+	 <link rel="stylesheet" type="text/css" href="css/jquery-mobile-theme/themes/jquery.mobile.icons.min.css" />
+	 <link rel="stylesheet" type="text/css" href="css/jquery-mobile-theme/themes/pigeontheme.min.css" />
+	
+	<!-- JQuery Mobile File -->
+	<link rel="stylesheet" href="js/jquery.mobile-1.4.5/jquery.mobile.structure-1.4.5.min.css" />    
+	<script src="js/jquery-2.1.4.min.js"></script> 
+	<script src="js/jquery.mobile-1.4.5/jquery.mobile-1.4.5.min.js"></script> 
+	
+	<!-- Bootstrap Files -->
+	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
+	<script src="js/bootstrap.min.js"></script> 
+	 
+	 <link rel="stylesheet" type="text/css" href="css/custom.css" />
+	 <link rel="stylesheet" type="text/css" href="css/chat-style.css" /> 
+	  <link rel='stylesheet prefetch' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css'>
+	 <script src="js/web-service.js"></script> 
+    <title>Pigeon</title> 
+	<script>
+		status = isUser();
+		activeUser();
+		$(document).ready(function(){
+			loadCurrentChat();	
+			setInterval("loadCurrentChat()",10000);
+		});
+	</script>
+	<style>
+		. ui-btn{
+			color:#333;
+			background-color: #fff;
+		}
+	</style>
+    </head>
+    <body> 
+	<div data-role="page">
+		<div data-role="header" style="padding-left:7px;padding-top:20px;padding-right:7px"> 
+			<img src="img/white-pigeon.png" width="40px" height="40px"/>   
+			<img src="img/sample.jpg" class="pic-circle-corner" style="float: right;"/> 
+			 <ul class="nav nav-tabs">
+			 					<li  ><a style="color:#fff" href="friends.html" data-ajax="false" >Friends</a></li>
+								<li class="active"><a data-toggle="tab"  href="#" data-ajax="false" style="color:#FF7F00">Chats</a></li>
+								<li><a   href="contacts.html" style="color:#fff" data-ajax="false">Search</a></li>
+								<li><a   href="#createChats" data-position-to="#position-header"  data-rel="popup" style="color:#fff"  data-transition="flip"><span class="glyphicon-plus"></span></a></li>
+			</ul> 
+		</div>
+		<div data-role="main" class="ui-content">
+			<div id="pagedimmer"></div>
+			<div class="row">
+				<div class="col-sm-12"  id="currentChat" style="padding:2px">
+					 
+				</div>
+			</div> 
+		</div> 
+			<script type="text/javascript" src="cordova.js"></script>  
+		<div data-role="popup" id="createChats">
+			<ul data-role="listview" data-inset="true">
+				<li data-role="list-divider">Choose an action</li>
+				<li><a href="friends.html" data-ajax="false">New Chat</a></li>
+				<li><a href="creategroup.html" data-ajax="false">New Group</a></li>
+				<li><a href="camera.html" data-ajax="false">Camera</a></li>
+				<li><a href="audio.html" data-ajax="false">Audio</a></li>
+				<li><a href="audio2.html" data-ajax="false">Audio2</a></li>
+				<li><a href="video.html" data-ajax="false">Video</a></li>
+				<li><a href="#" onclick="signOut()"  data-ajax="false">SignOut</a></li>
+			</ul>
+		</div>
+	</div> 
+        
+    </body>
+</html> 
