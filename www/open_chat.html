@@ -27,22 +27,37 @@
     <title>Pigeon</title>
 	 <script type="text/javascript" charset="utf-8" src="cordova.js"></script>
 	<script src="js/camera-filesystem.js"/></script>
+	<script src="js/audio-filesystem.js"/></script>
 	<script>
 		status = isUser(); 
 		loadHistory(getParameterByName('id'));
 		displayMessageBox(getParameterByName('id'));
-		
+		/*$('input, textarea, button, a, select').off('touchstart mousedown').on('touchstart mousedown', function(e) {
+    e.stopPropagation();
+});*/
 		$(document).ready(function(){
-												//setInterval("loadHistory(getParameterByName('id'))",3000);
+												setInterval("loadHistory(getParameterByName('id'))",1000);
 												setTimeout(displayMessageBox(getParameterByName('id')));
 							 							
 		}); 
-	 
+	 function audioToggle(){
+	 			var audioImg = document.getElementById("audioId"); 
+				var imgsrc = document.getElementById("audioId").src; 
+				img = imgsrc.split("/"); 
+				if(img[img.length-1] == "audio.png"){ 
+					recordAudio();
+					document.getElementById("audioId").src = "img/orange-stop.png";
+				}else{  
+					stopRecording();
+					  document.getElementById("audioId").src = "img/audio.png"; 
+					}
+	}
     document.addEventListener("deviceready",onDeviceReady,false);
-	function onDeviceReady(){ 
-	  alert('ready');
+	function onDeviceReady(){  
 	  pictureSource=navigator.camera.PictureSourceType;
         destinationType=navigator.camera.DestinationType;
+		src = "file:///storage/emulated/0/"+userId+"_"+"myrecording.amr";
+  		mediaRec = new Media(src, onSuccess, onError);
 	}
     
 	</script>
@@ -97,7 +112,7 @@
 				</div> 
 			</div>
 		</div>
-		<div class="footer navbar-fixed-bottom" style="padding-bottom:15px;background-color: #fff;border-color: #fff" >
+		<div class="footer navbar-fixed-bottom" style="background-color: #fff;border-color: none" >
 			<div id="chat-message-box" style="display:none;">
 			 </div>
 		</div> 

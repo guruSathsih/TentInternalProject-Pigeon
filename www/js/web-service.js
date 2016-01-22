@@ -345,7 +345,7 @@ function display(id,name){
 function displayMessageBox(toUserId){
 	var fromUserId = localStorage.getItem('userId');
 	type = 0;
-	var box = "<div class='chat-message clearfix'><table class='col-sm-12'><tr><td style='width:84%'><label id='ltext'></label><textarea name='message-to-send' id='message-to-send' placeholder ='Type your message' rows='3' onkeypress='if(handle(event)){sendTextMessage("+fromUserId+","+toUserId+","+type+");}'></textarea>  <td style='text-align:right'><i style='padding:2px;cursor:pointer'  class='fa fa-file-image-o' onClick='toUser = "+toUserId+";type = "+type+";getPhoto(pictureSource.PHOTOLIBRARY);'></i><img src='img/logo.png' style='cursor:pointer;' width='40px' height='40px' onclick='sendTextMessage("+fromUserId+","+toUserId+","+type+")'/></td></tr></table></div> ";
+	var box = "<div class='chat-message clearfix'><table class='col-sm-12'><tr><td style='width:100%;height:100%'><label id='ltext'></label><textarea name='message-to-send' id='message-to-send' placeholder ='Type your message' rows='3' style='width:100%;height:100%;border-bottom:none;border-left:none;border-right:none;border-radius:0 !important' onkeypress='if(handle(event)){sendTextMessage("+fromUserId+","+toUserId+","+type+");}'></textarea>  <td style='text-align:right'><img src='img/camera-orange.png' width='40px' height='40px' style='padding:2px;cursor:pointer'  onClick='toUser = "+toUserId+";getPhoto(pictureSource.PHOTOLIBRARY);'/><img src='img/try.png' style='cursor:pointer;' width='40px' height='40px' onclick='sendTextMessage("+fromUserId+","+toUserId+","+type+")'/><img width='40px' id='audioId' onclick='audioToggle()' height='40px' src='img/audio.png' style='cursor:pointer;'/></td></tr></table></div> ";
 	$("#chat-message-box").html(box);  
 }
 
@@ -512,7 +512,7 @@ function loadGroupHistory(groupId){
 function displayGroupMessageBox(groupId){
 	var fromUserId = localStorage.getItem('userId');
 	type = 1;
-	var box = "<div class='chat-message clearfix'><table class='col-sm-12'><tr><td style='width:95%'><label id='ltext'></label><textarea name='message-to-send' id='message-to-send' placeholder ='Type your message' rows='3' onkeypress='if(handle(event)){sendTextMessage("+fromUserId+","+groupId+","+type+");}'></textarea>  <!-- <i class='fa fa-file-o'></i> &nbsp;&nbsp;&nbsp;<i class='fa fa-file-image-o'></i> --><td style='width:5%;text-align:right'><i class='fa fa-file-image-o'></i><img src='img/logo.png' style='cursor:pointer;' width='40px' height='40px' onclick='sendTextMessage("+fromUserId+","+groupId+","+type+")'/></td></tr></table></div> ";
+	var box = "<div class='chat-message clearfix'><table class='col-sm-12'><tr><td style='width:95%'><label id='ltext'></label><textarea name='message-to-send' id='message-to-send' placeholder ='Type your message' rows='3' onkeypress='if(handle(event)){sendTextMessage("+fromUserId+","+groupId+","+type+");}'></textarea>  <!-- <i class='fa fa-file-o'></i> &nbsp;&nbsp;&nbsp;<i class='fa fa-file-image-o'></i> --><td style='width:5%;text-align:right'><i class='fa fa-file-image-o'></i><img src='img/orange-send-button.png' style='cursor:pointer;' width='40px' height='40px' onclick='sendTextMessage("+fromUserId+","+groupId+","+type+")'/></td></tr></table></div> ";
 	$("#chat-message-box").html(box);  
 }
 
