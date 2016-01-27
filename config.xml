@@ -82,4 +82,9 @@
     <allow-intent href="itms-apps:*"/>-->
   </platform>
   <platform name="winphone"/>
+  
+  
+  <feature name="PushPlugin">
+  <param name="android-package" value="com.plugin.gcm.PushPlugin" />
+</feature>
 </widget>

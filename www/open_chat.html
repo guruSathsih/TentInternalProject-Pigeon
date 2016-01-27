@@ -29,7 +29,10 @@
 	<script src="js/camera-filesystem.js"/></script>
 	<script src="js/audio-filesystem.js"/></script>
 	<script>
-		status = isUser(); 
+	var toUser;
+	var type;
+		status = isUser();  
+		localStorage.setItem("lastMessage",0);
 		loadHistory(getParameterByName('id'));
 		displayMessageBox(getParameterByName('id'));
 		/*$('input, textarea, button, a, select').off('touchstart mousedown').on('touchstart mousedown', function(e) {
@@ -44,19 +47,21 @@
 	 			var audioImg = document.getElementById("audioId"); 
 				var imgsrc = document.getElementById("audioId").src; 
 				img = imgsrc.split("/"); 
-				if(img[img.length-1] == "audio.png"){ 
+				if(img[img.length-1] == "audio.png"){  
 					recordAudio();
+					alert("record");
 					document.getElementById("audioId").src = "img/orange-stop.png";
 				}else{  
 					stopRecording();
+					alert("stop");
 					  document.getElementById("audioId").src = "img/audio.png"; 
 					}
 	}
     document.addEventListener("deviceready",onDeviceReady,false);
 	function onDeviceReady(){  
-	  pictureSource=navigator.camera.PictureSourceType;
+	  	pictureSource=navigator.camera.PictureSourceType;
         destinationType=navigator.camera.DestinationType;
-		src = "file:///storage/emulated/0/"+userId+"_"+"myrecording.amr";
+		src = "file:///storage/emulated/0/"+userId+"_"+"myrecording.mp3";
   		mediaRec = new Media(src, onSuccess, onError);
 	}
     

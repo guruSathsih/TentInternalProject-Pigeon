@@ -1,8 +1,7 @@
 	 var pictureSource;   // picture source
     var destinationType; // sets the format of returned value  
 	
-	var toUser;
-	var type;
+	
     // Called when a photo is successfully retrieved
     //
     function uploadPhoto(imageURI) { 
