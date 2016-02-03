@@ -85,7 +85,7 @@ function doSignUp()
 		return false;
 	}
 	else 
-	{ alert(localStorage.getItem("registrationId"));
+	{ 
 		document.getElementById("registrationId").value = localStorage.getItem("registrationId");
 		 
 		startPageLoad();
@@ -94,7 +94,7 @@ function doSignUp()
 			url:getBaseURL()+"?rquest=signuppigeon",
 			data: $("#signupform").serialize(),
 			//dataType: 'json',
-			success:function(responseText){  alert(2);
+			success:function(responseText){   
 					endPageLoad(); 
 					if(responseText == 0)
 					{
@@ -168,7 +168,7 @@ function doLogin(){
 			return false;	
 		}
 		else {
-				alert(localStorage.getItem("registrationId"));
+				 
 		document.getElementById("registrationId").value = localStorage.getItem("registrationId");
 			startPageLoad();
 			$.ajax({
