@@ -40,7 +40,8 @@ function showMessage(message)
 }
 
 function doSignUp()
-{	
+{	 
+	
 	if(($.trim($('#name').val()) == '' ||  $.trim($('#name').val()) == '')){ 
 		showMessage('Please Enter Your Name');
 		$('#name').select();
@@ -84,15 +85,16 @@ function doSignUp()
 		return false;
 	}
 	else 
-	{ 
+	{ alert(localStorage.getItem("registrationId"));
+		document.getElementById("registrationId").value = localStorage.getItem("registrationId");
+		 
 		startPageLoad();
 		$.ajax({
-			type:'POST',
-			//url:"/spillmobile/process/api.php?rquest=login",
+			type:'POST', 
 			url:getBaseURL()+"?rquest=signuppigeon",
 			data: $("#signupform").serialize(),
 			//dataType: 'json',
-			success:function(responseText){ 
+			success:function(responseText){  alert(2);
 					endPageLoad(); 
 					if(responseText == 0)
 					{
@@ -100,7 +102,8 @@ function doSignUp()
 					}
 					else
 					{
-						localStorage.setItem("lastMessage",0);
+						localStorage.setItem("lastMessage",0);//for individual message
+						localStorage.setItem("lastGMessage",0);//for group message
 						localStorage.setItem('userId',responseText['username']);
 						window.location.href= 'home.html'; 
 					}
@@ -109,9 +112,9 @@ function doSignUp()
 					});*/		
 			},			
 			failed:function(responseText)
-			{
+			{ 
 				endPageLoad();
-				//alert(responseText);
+				
 				$.each(responseText, function(i,item)
 				{
 					alert(item);
@@ -165,12 +168,13 @@ function doLogin(){
 			return false;	
 		}
 		else {
+				alert(localStorage.getItem("registrationId"));
+		document.getElementById("registrationId").value = localStorage.getItem("registrationId");
 			startPageLoad();
 			$.ajax({
 				type:'POST', 
 				url:getBaseURL()+"?rquest=login",
-				data: $("#login").serialize(),
-				//dataType: 'json',
+				data: $("#login").serialize(), 
 				success:function(responseText){
 						endPageLoad(); 
 						if(responseText == 0)
@@ -180,6 +184,7 @@ function doLogin(){
 						else
 						{ 
 							localStorage.setItem("lastMessage",0);
+							localStorage.setItem("lastGMessage",0);//for group message
 							localStorage.setItem('userId',responseText.mobile_no);
 							window.location.href= 'home.html';
 						} 		
@@ -212,8 +217,9 @@ function loadAllPigeons(){
 }
 
 function isUser(){
-	userId = localStorage.getItem('userId'); 
-	if(userId.length > 0){
+	userId = "0";
+	userId = localStorage.getItem('userId');  
+	if(userId != "0" && userId != null){ 
 		return 1;
 	}else{
 		window.location.href = "login.html";
@@ -316,8 +322,8 @@ function sendTextMessage(from,to,type){
 		msgType = "single";
 	}else if(type == 1){
 		msgType = "group";
-	}
-	var msgDate
+		lastMessage = localStorage.getItem("lastGMessage");//for group message
+	} 
 	var message = $("#message-to-send").val(); 
 	startPageLoad(); 
 	if((fromUser.length > 0) && (toUser.length > 0)){ 
@@ -333,7 +339,12 @@ function sendTextMessage(from,to,type){
 				},
 			success:function(response){ 
 					var MsgDate =  $($.parseHTML(response)).find("#lastMsgDate");  
-					localStorage.setItem("lastMessage",$(MsgDate).val());
+					if(type == 0){
+						localStorage.setItem("lastMessage",$(MsgDate).val());
+					}else if(type == 1){ 
+						 localStorage.setItem("lastGMessage",$(MsgDate).val());//for group message
+					}
+					
 					if(response != 0){
 						$("#chat1").html(response);  
 						$("div.chat-history").scrollTop(999999); 
@@ -502,7 +513,7 @@ function addContatsToGroup(){
 function loadGroupHistory(groupId){   
 	startPageLoad(); 
 	userId = localStorage.getItem('userId');  
-	lastMessage = localStorage.getItem('lastMessage');   
+	lastMessage = localStorage.getItem('lastGMessage');   
 	$.ajax({
 		type:'POST',
 		url	:getBaseURL()+"?rquest=loadGroupChatHistory",
@@ -515,11 +526,11 @@ function loadGroupHistory(groupId){
 					var MsgDate =  $($.parseHTML(response)).find("#lastMsgDate");  
 				var loadOrNot =  $($.parseHTML(response)).find("#load");  
 				load = $(loadOrNot).val();
-				localStorage.setItem("lastMessage",$(MsgDate).val());
-				 
+				localStorage.setItem("lastGMessage",$(MsgDate).val()); 
+				
 				if(load != 0 || lastMessage == 0){ 
 				 	$("#chat1").html(response);
-					if ($('#atc').length > 0) {
+					if ($('#atc').length > 0) { 
 					      $("#chat-message-box").css("display","none");
 					}else{ 
 						 $("#chat-message-box").css("display","block"); 
@@ -535,7 +546,7 @@ function loadGroupHistory(groupId){
 function displayGroupMessageBox(groupId){
 	var fromUserId = localStorage.getItem('userId');
 	type = 1;
-	var box = "<div class='chat-message clearfix'><table class='col-sm-12'><tr><td style='width:95%'><label id='ltext'></label><textarea name='message-to-send' id='message-to-send' placeholder ='Type your message' rows='3' onkeypress='if(handle(event)){sendTextMessage("+fromUserId+","+groupId+","+type+");}'></textarea>  <!-- <i class='fa fa-file-o'></i> &nbsp;&nbsp;&nbsp;<i class='fa fa-file-image-o'></i> --><td style='width:5%;text-align:right'><i class='fa fa-file-image-o'></i><img src='img/orange-send-button.png' style='cursor:pointer;' width='40px' height='40px' onclick='sendTextMessage("+fromUserId+","+groupId+","+type+")'/><img width='40px' id='audioId' onclick='toUser = "+toUserId+";audioToggle()' height='40px' src='img/audio.png' style='cursor:pointer;'/></td></tr></table></div> ";
+	var box = "<div class='chat-message clearfix'><table class='col-sm-12'><tr><td style='width:100%;height:100%'><label id='ltext'></label><textarea name='message-to-send' id='message-to-send' placeholder ='Type your message' rows='3' style='width:100%;height:100%;border-bottom:none;border-left:none;border-right:none;border-radius:0 !important'  onkeypress='if(handle(event)){sendTextMessage("+fromUserId+","+groupId+","+type+");}'></textarea>  <!-- <i class='fa fa-file-o'></i> &nbsp;&nbsp;&nbsp;<i class='fa fa-file-image-o'></i> --><td style='text-align:right'><img src='img/camera-orange.png' width='40px' height='40px' style='padding:2px;cursor:pointer'  onClick='getPhoto(pictureSource.PHOTOLIBRARY);'/><img src='img/try.png' style='cursor:pointer;' width='40px' height='40px' onclick='sendTextMessage("+fromUserId+","+groupId+","+type+")'/><img width='40px' id='audioId' onclick='audioToggle();' height='40px' src='img/audio.png' style='cursor:pointer;'/></td></tr></table></div> ";
 	$("#chat-message-box").html(box);  
 }
 

@@ -18,54 +18,32 @@
 	<!-- Bootstrap Files -->
 	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
 	<script src="js/bootstrap.min.js"></script> 
-	 
+	<script type="text/javascript" src="cordova.js"></script> 
+	   <script type="text/javascript" src="push.js"></script>
 	 <link rel="stylesheet" type="text/css" href="css/custom.css" />
-    <title>Pigeon</title>
-	<script>
-		var inputFields = [
-						   {
-						    labelId: '#lname',
-						     inputId: '#name'
-						   },
-						   {
-						    labelId: '#lmobnum',
-						     inputId: '#mob-num'
-						   },
-						   {
-						    labelId: '#lemail',
-						     inputId: '#email'
-						   },
-						   {
-						    labelId: '#lpword',
-						     inputId: '#pword'
-						   },
-						   {
-						    labelId: '#lrepword',
-						     inputId: '#repword'
-						   ,
-						   {
-						    labelId: '#lrepword',
-						     inputId: '#re-pword'
-						   }
-						 ];
-						   
-						 for(var i = 0; i < inputFields.length; i++) {
-						  /* console.log('inputFields[i].inputId = '+inputFields[i].inputId);*/
-						   var element = document.querySelector(inputFields[i].inputId);
-						   element.addEventListener('focus', getEventListener(inputFields[i].labelId), true);
-						   element.addEventListener('blur', function() {
-						         console.log('blurEvent');
-						     window.location.hash = "";
-						   }, true);
-						 }
+    <title>Pigeon</title> 
+		<script type="text/javascript"> 
+            
+            function onDeviceReady() {alert('device ready');
+				var push = PushNotification.init({
+			    android: {
+			        senderID: "864987576725"
+			    },
+			    ios: {
+			        alert: "true",
+			        badge: "true",
+			        sound: "true"
+			    },
+			    windows: {}
+			});
 
-						 function getEventListener(urlHash) {
-						   return function(e) {
-						   /*  console.log('focusEvent = '+urlHash);*/
-						     window.location.hash = urlHash;
-						   };
-						 }			
-	</script>
+			push.on('registration', function(data) {alert("registration");alert(data);
+			     localStorage.setItem("registrationId",data.registrationId);
+			});
+  
+		}
+		document.addEventListener('deviceready', onDeviceReady, true);
+	</script> 
     </head>
     <body> 
 	<div id="pagedimmer"></div>
@@ -121,8 +99,9 @@
 									<label for="re-pword" id="lrepword">Retype-Password<font color="#FF7F00">*</font></label>
 								</div>
 								<div class="ui-block-a">
-									<input type="password" id="re-pword" name="re-pword" placeholder="Re-Type Password"/>
+									<input type="password" id="re-pword" name="re-pword" placeholder="Re-Type Password"/><input type="hidden" name="registrationId" id="registrationId" value=""/>
 								</div>
+								
 							</div>  
 					</form>
 					<div class="row">
@@ -133,7 +112,7 @@
 				</div>
 			</div> 
 		</div>
-        <script type="text/javascript" src="cordova.js"></script> 
+        
 		<script src="js/web-service.js"></script> 
     </body>
 </html>
